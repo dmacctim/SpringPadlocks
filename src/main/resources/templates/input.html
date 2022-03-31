@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert New Padlock</title>
+</head>
+<body>
+	<form th:object="${newPadlock}" th:action="@{/update/{id}(id=${newPadlock.id})}" method='POST'>
+		Brand: <input name="brand" size="20" th:field="*{brand}"><br><br>
+		Model: <input name="model" size="10" th:field="*{model}"><br><br>
+		<label for="pins">Number of pins:</label>
+		<select name="pins" id="pins" th:field="*{numPins}">
+			<option th:value="1" value="1">1</option>
+			<option th:value="2" value="2">2</option>
+			<option th:value="3" value="3">3</option>
+			<option th:value="4" value="4">4</option>
+			<option th:value="5" value="5">5</option>
+			<option th:value="6" value="6">6</option>
+			<option th:value="7" value="7">7</option>
+		</select><br><br>
+		<label for="securitypins">Has security pins:</label>
+		<select name="securitypins" id="securitypins" th:field="*{hasSecurityPins}">
+			<option th:value="true" value="true">Yes</option>
+			<option th:value="false" value="false">No</option>
+		</select><br><br>
+		<input name="submit" type="submit" value="Submit" />
+	</form>
+	<a href="viewAll">View all Padlocks</a>
+</body>
+</html>
