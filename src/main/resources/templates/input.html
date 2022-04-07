@@ -2,13 +2,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New Padlock</title>
+<script type = "text/javascript">
+	function validate() {
+		if(document.forms["myForm"]["brand"].value == "") {
+			alert("Error: Brand is empty!");
+			return false;
+		}
+		
+		if (document.forms["myForm"]["model"].value == "") {
+			alert("Error: Model is empty!");
+			return false;
+		}
+		
+		if(document.forms["myForm"]["pins"].options[pins.selectedIndex].value == 0) {
+			alert("Error: Number of pins is empty!");
+			return false;
+		}
+		
+		if(document.forms["myForm"]["securitypins"].options[securitypins.selectedIndex].value == 0) {
+			alert("Error: Has security pins is empty!");
+			return false;
+		}
+		
+		return true;
+	}
+</script>
 </head>
 <body>
-	<form th:object="${newPadlock}" th:action="@{/update/{id}(id=${newPadlock.id})}" method='POST'>
+	<form name="myForm" th:object="${newPadlock}" th:action="@{/update/{id}(id=${newPadlock.id})}" method='POST' onsubmit = "return validate()">
 		Brand: <input name="brand" size="20" th:field="*{brand}"><br><br>
 		Model: <input name="model" size="10" th:field="*{model}"><br><br>
 		<label for="pins">Number of pins:</label>
 		<select name="pins" id="pins" th:field="*{numPins}">
+			<option value="0"></option>
 			<option th:value="1" value="1">1</option>
 			<option th:value="2" value="2">2</option>
 			<option th:value="3" value="3">3</option>
@@ -21,6 +47,7 @@
 		<select name="securitypins" id="securitypins" th:field="*{hasSecurityPins}">
 			<option th:value="true" value="true">Yes</option>
 			<option th:value="false" value="false">No</option>
+			<option value="0"></option>
 		</select><br><br>
 		<input name="submit" type="submit" value="Submit" />
 	</form>
